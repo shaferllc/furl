@@ -11,6 +11,8 @@ cd "$(dirname "$0")"
 DIST=0
 [ "${1:-}" = "--dist" ] && DIST=1
 SHORT_VERSION="${VERSION:-$(tr -d '[:space:]' < VERSION 2>/dev/null || echo 0.1.0)}"
+# Monotonic build number, from the commit count.
+FURL_BUILD="$(git rev-list --count HEAD 2>/dev/null || echo 1)"
 
 if [ "$DIST" = "1" ]; then
   # Anything people download has to run on both architectures — an arm64-only
